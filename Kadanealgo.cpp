@@ -1,4 +1,5 @@
-//for finding maximum subarray sum
+#include<bits/stdc++.h>
+using namespace std;
 int maxSubArray(vector<int>& nums) {
         int sum = 0;
         int maxi = 0;

@@ -1,5 +1,5 @@
-//kmp algorithm for string matching returning first index where target string found 
-
+#include<bits/stdc++.h>
+using namespace std;
 class Solution {
     void computeLPS(string s, vector<int> & LPS)
     {
