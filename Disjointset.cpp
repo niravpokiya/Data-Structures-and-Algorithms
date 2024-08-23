@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
-using namespace std;
+using namespace std;    
 
 class DisjointSet{
-    vector<int> parent , rank;
+    vector<int> parent , rank, size;
 
     public :
 
@@ -10,9 +10,10 @@ class DisjointSet{
     {
         rank.assign(n + 1, 0);
         parent.assign(n + 1, 0);
+        size.assign(n + 1, 0);
 
-        for(int i = 0; i <= n; i++)
-        parent[i] = i;
+        for(int i = 0; i <= n; i++){
+        parent[i] = i; size[i] = 1;}
     }
 
     int findparent(int u)                            //for finding greatest parent of current node
@@ -28,17 +29,14 @@ class DisjointSet{
         int par_v = findparent(v);
 
         if(par_u == par_v) return;
-        else if(rank[par_u] < rank[par_v])
+        else if(size[par_u] < size[par_v])
         {
             parent[par_u] = par_v;
-        }
-        else if(rank[par_u] > rank[par_v])
-        {
-            parent[par_v] = par_u;
+            size[par_v] += size[par_u];
         }
         else{
             parent[par_v] = par_u;
-            rank[par_u]++;
+            size[par_u]+= size[par_v];
         }
     }
 };
@@ -52,7 +50,7 @@ int main()
     Ds.unionByrank(6, 7);
     Ds.unionByrank(5, 6);
 
-    if(Ds.findparent(6) == Ds.findparent(7)) cout <<"YES Both belongs to same component";
+    if(Ds.findparent(1) == Ds.findparent(7)) cout <<"YES Both belongs to same component";
     else cout << "No both belongs to different components";
     
 }
